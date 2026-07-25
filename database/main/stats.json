@@ -1,6 +1,6 @@
 {
-  "commandsExecuted": 124,
-  "command_ping": 38,
+  "commandsExecuted": 139,
+  "command_ping": 41,
   "command_self": 2,
   "command_swgc": 4,
   "dailyResets": 5,
@@ -11,16 +11,16 @@
   "command_allmenu": 5,
   "command_gay": 1,
   "command_brat": 9,
-  "command_musicmaker": 1,
+  "command_musicmaker": 2,
   "command_gpt5": 1,
   "command_ssweb": 2,
   "command_bratimg": 6,
   "command_bratcewek": 3,
   "command_wm": 9,
   "command_rvo": 3,
-  "command_d": 11,
+  "command_d": 16,
   "command_malingpp": 1,
-  "command_bdsm": 2,
+  "command_bdsm": 4,
   "command_nsfwon": 1,
   "command_nsfw": 1,
   "command_hentai": 1,
@@ -31,5 +31,8 @@
   "command_emojitoanimasi": 4,
   "command_jpm": 4,
   "command_pakustad": 2,
-  "command_bratvid": 2
+  "command_bratvid": 2,
+  "command_emojimix": 1,
+  "command_senja": 2,
+  "command_tt": 1
 }

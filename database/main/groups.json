@@ -24518,8 +24518,8 @@
   "120363427618821749@g.us": {
     "chatStats": {
       "6288212949095@s.whatsapp.net": {
-        "count": 36,
-        "lastChat": 1784912893677,
+        "count": 39,
+        "lastChat": 1784965146349,
         "name": "idk"
       },
       "6285133216497@s.whatsapp.net": {
@@ -24533,8 +24533,8 @@
         "name": "mochy"
       },
       "6289673765513@s.whatsapp.net": {
-        "count": 56,
-        "lastChat": 1784939980353,
+        "count": 62,
+        "lastChat": 1784965158040,
         "name": "MRX"
       },
       "6283116101192@s.whatsapp.net": {
@@ -53098,25 +53098,42 @@
     "goodbye": false,
     "leave": false,
     "jid": "120363410296353710@g.us",
-    "name": "Unknown Group",
+    "name": "MARKET ALL GAME",
     "antilink": false,
     "antitoxic": false,
     "mute": false,
     "game": true,
     "rpg": true,
     "warnings": [],
-    "chat": {}
+    "chat": {},
+    "chatStats": {
+      "6288212949095@s.whatsapp.net": {
+        "count": 10,
+        "lastChat": 1784963813282,
+        "name": "idk"
+      },
+      "62895428283397@s.whatsapp.net": {
+        "count": 6,
+        "lastChat": 1784966904971,
+        "name": "mochy"
+      },
+      "6283116101192@s.whatsapp.net": {
+        "count": 7,
+        "lastChat": 1784960715207,
+        "name": "ebew"
+      }
+    }
   },
   "120363429169914964@g.us": {
     "chatStats": {
       "6282123886154@s.whatsapp.net": {
-        "count": 109,
-        "lastChat": 1784904146179,
+        "count": 114,
+        "lastChat": 1784955623545,
         "name": "zz"
       },
       "6285133216497@s.whatsapp.net": {
-        "count": 67,
-        "lastChat": 1784891301213,
+        "count": 74,
+        "lastChat": 1784955611518,
         "name": "Yogiri"
       }
     },
