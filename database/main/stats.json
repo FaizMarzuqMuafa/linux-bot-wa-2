@@ -1,9 +1,9 @@
 {
-  "commandsExecuted": 139,
-  "command_ping": 41,
+  "commandsExecuted": 143,
+  "command_ping": 42,
   "command_self": 2,
   "command_swgc": 4,
-  "dailyResets": 5,
+  "dailyResets": 6,
   "command_ganti-asset": 1,
   "command_menu": 2,
   "command_s": 2,
@@ -34,5 +34,6 @@
   "command_bratvid": 2,
   "command_emojimix": 1,
   "command_senja": 2,
-  "command_tt": 1
+  "command_tt": 1,
+  "command_htprem": 3
 }
