@@ -24518,8 +24518,8 @@
   "120363427618821749@g.us": {
     "chatStats": {
       "6288212949095@s.whatsapp.net": {
-        "count": 67,
-        "lastChat": 1785133601989,
+        "count": 68,
+        "lastChat": 1785263376519,
         "name": "idk"
       },
       "6285133216497@s.whatsapp.net": {
@@ -24541,6 +24541,11 @@
         "count": 34,
         "lastChat": 1785074761510,
         "name": "ebew"
+      },
+      "120363427618821749@g.us": {
+        "count": 2,
+        "lastChat": 1785263441292,
+        "name": "Unknown"
       }
     },
     "jid": "120363427618821749@g.us",
@@ -53186,6 +53191,27 @@
     },
     "jid": "120363429837958556@g.us",
     "name": "MLBB:AJAH",
+    "welcome": false,
+    "leave": false,
+    "goodbye": false,
+    "antilink": false,
+    "antitoxic": false,
+    "mute": false,
+    "game": true,
+    "rpg": true,
+    "warnings": [],
+    "chat": {}
+  },
+  "120363418225543808@g.us": {
+    "chatStats": {
+      "6288212949095@s.whatsapp.net": {
+        "count": 1,
+        "lastChat": 1785263754823,
+        "name": "idk"
+      }
+    },
+    "jid": "120363418225543808@g.us",
+    "name": "GB BOT FREE BY PAIS",
     "welcome": false,
     "leave": false,
     "goodbye": false,
