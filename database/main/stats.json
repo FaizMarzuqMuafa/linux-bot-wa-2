@@ -1,11 +1,11 @@
 {
-  "commandsExecuted": 159,
-  "command_ping": 50,
-  "command_self": 3,
+  "commandsExecuted": 167,
+  "command_ping": 51,
+  "command_self": 4,
   "command_swgc": 4,
   "dailyResets": 11,
-  "command_ganti-asset": 1,
-  "command_menu": 3,
+  "command_ganti-asset": 2,
+  "command_menu": 4,
   "command_s": 2,
   "command_addown": 2,
   "command_allmenu": 5,
@@ -37,5 +37,6 @@
   "command_tt": 4,
   "command_htprem": 3,
   "command_join": 1,
-  "command_onlythisgroup": 1
+  "command_onlythisgroup": 1,
+  "command_sewabot": 4
 }

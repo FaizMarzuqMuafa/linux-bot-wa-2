@@ -24518,8 +24518,8 @@
   "120363427618821749@g.us": {
     "chatStats": {
       "6288212949095@s.whatsapp.net": {
-        "count": 75,
-        "lastChat": 1785490750514,
+        "count": 83,
+        "lastChat": 1785505158617,
         "name": "idk"
       },
       "6285133216497@s.whatsapp.net": {
@@ -24548,8 +24548,8 @@
         "name": "Unknown"
       },
       "62881011965054@s.whatsapp.net": {
-        "count": 5,
-        "lastChat": 1785490751517,
+        "count": 15,
+        "lastChat": 1785505149101,
         "name": "Faiz"
       }
     },
@@ -53128,8 +53128,8 @@
         "name": "cid"
       },
       "6283116101192@s.whatsapp.net": {
-        "count": 11,
-        "lastChat": 1785399870837,
+        "count": 12,
+        "lastChat": 1785498254529,
         "name": "ebew"
       },
       "62895335683777@s.whatsapp.net": {
@@ -53141,6 +53141,46 @@
         "count": 2,
         "lastChat": 1785409623419,
         "name": "Yogiri"
+      },
+      "6288226053733@s.whatsapp.net": {
+        "count": 7,
+        "lastChat": 1785502750125,
+        "name": "jual beli"
+      },
+      "6285181975237@s.whatsapp.net": {
+        "count": 3,
+        "lastChat": 1785503435406,
+        "name": "Guss."
+      },
+      "6285176863643@s.whatsapp.net": {
+        "count": 1,
+        "lastChat": 1785497348154,
+        "name": "Ilham ade flado"
+      },
+      "6283119965808@s.whatsapp.net": {
+        "count": 4,
+        "lastChat": 1785502677171,
+        "name": "Nisa"
+      },
+      "6283193821226@s.whatsapp.net": {
+        "count": 1,
+        "lastChat": 1785499813174,
+        "name": "TAMVAN"
+      },
+      "6283131017419@s.whatsapp.net": {
+        "count": 2,
+        "lastChat": 1785500053308,
+        "name": "Tamzz store"
+      },
+      "6282119506864@s.whatsapp.net": {
+        "count": 1,
+        "lastChat": 1785500848542,
+        "name": "//Gisell_cute ><"
+      },
+      "6285124947324@s.whatsapp.net": {
+        "count": 2,
+        "lastChat": 1785503704506,
+        "name": "JB Marpet"
       }
     }
   },
@@ -53225,6 +53265,41 @@
     "welcome": false,
     "leave": false,
     "goodbye": false,
+    "antilink": false,
+    "antitoxic": false,
+    "mute": false,
+    "game": true,
+    "rpg": true,
+    "warnings": [],
+    "chat": {}
+  },
+  "120363430214429295@g.us": {
+    "chatStats": {
+      "62895428283397@s.whatsapp.net": {
+        "count": 3,
+        "lastChat": 1785492471942,
+        "name": "kiri"
+      }
+    },
+    "jid": "120363430214429295@g.us",
+    "name": "sakintin kintol",
+    "welcome": false,
+    "leave": false,
+    "goodbye": false,
+    "antilink": false,
+    "antitoxic": false,
+    "mute": false,
+    "game": true,
+    "rpg": true,
+    "warnings": [],
+    "chat": {}
+  },
+  "120363426276111447@g.us": {
+    "welcome": false,
+    "goodbye": false,
+    "leave": false,
+    "jid": "120363426276111447@g.us",
+    "name": "Unknown Group",
     "antilink": false,
     "antitoxic": false,
     "mute": false,
