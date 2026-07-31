@@ -24518,8 +24518,8 @@
   "120363427618821749@g.us": {
     "chatStats": {
       "6288212949095@s.whatsapp.net": {
-        "count": 68,
-        "lastChat": 1785263376519,
+        "count": 75,
+        "lastChat": 1785490750514,
         "name": "idk"
       },
       "6285133216497@s.whatsapp.net": {
@@ -24546,6 +24546,11 @@
         "count": 2,
         "lastChat": 1785263441292,
         "name": "Unknown"
+      },
+      "62881011965054@s.whatsapp.net": {
+        "count": 5,
+        "lastChat": 1785490751517,
+        "name": "Faiz"
       }
     },
     "jid": "120363427618821749@g.us",
