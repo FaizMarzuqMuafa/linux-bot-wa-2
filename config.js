@@ -4,24 +4,24 @@ import * as ownerPremiumDb from "./src/lib/ourin-premium-db.js";
 //  utamakan baca object config sampai bawah
 const config = {
   info: {
-    website: "https://firefly.maiku.my.id",
+    website: "https://fallxd-store-alpha.vercel.app",
     grupwa: "https://chat.whatsapp.com/xxxx",
   },
 
   owner: {
-    name: "pais", // Nama owner
-    number: ["6288212949095"], // Format: 628xxx (tanpa + atau 0)
+    name: "FallZx Infinity ", // Nama owner
+    number: ["628xxxxxxxxxx"], // Format: 628xxx (tanpa + atau 0)
   },
 
   session: {
-    pairingNumber: "6285133216497", // Nomor WA yang akan di-pair, ini penting
+    pairingNumber: "628xxxxxxxxx", // Nomor WA yang akan di-pair, ini penting
     usePairingCode: true, // true = Pairing Code, false = QR Code
   },
 
   bot: {
-    name: "justfriend mania", // Nama bot
-    version: "3.2", // Versi bot
-    developer: "pais", // Nama developer
+    name: "𝗢𝗨𝗥𝗜𝗡 𝗗𝗘𝗟𝗨𝗫𝗘", // Nama bot
+    version: "3.3", // Versi bot
+    developer: "FallZx Infinity", // Nama developer
   },
 
   assets: {
@@ -101,7 +101,7 @@ const config = {
 
   sticker: {
     packname: "𝗢𝗨𝗥𝗜𝗡 𝗗𝗘𝗟𝗨𝗫𝗘", // Nama pack sticker
-    author: "Zann", // Author sticker
+    author: "FallZx Infinity ", // Author sticker
   },
 
   saluran: {

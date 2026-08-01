@@ -716,7 +716,7 @@ async function startConnection(options = {}) {
           } catch { }
 
           const saluranId =
-            config.saluran?.id || "120363400911374213@newsletter";
+            config.saluran?.id || "120363186130999681@newsletter";
           const saluranName =
             config.saluran?.name || config.bot?.name || "Ourin-AI";
 

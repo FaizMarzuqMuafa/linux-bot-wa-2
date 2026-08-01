@@ -261,7 +261,8 @@ async function buildMenuText(
   txt += `kebutuhanmu, mulai dari download\n`;
   txt += `video, main game, tanya jawab, nyari\n`;
   txt += `info/sesuatu, bikin sticker, dan lain-lain.\n\n`;
-
+  txt += `NEED PANEL? :\n`;
+  txt += `https://fallxd-store-alpha.vercel.app\n\n`;
   txt += `    ᯓ INFO USER\n`;
   txt += `╭   • Nama : ${m.pushName || "User"}\n`;
   txt += `┆   • Status : ${userRole}\n`;
@@ -378,7 +379,7 @@ function getContextInfo(
   thumbBuffer,
   renderLargerThumbnail = false,
 ) {
-  const saluranId = botConfig.saluran?.id || "120363400911374213@newsletter";
+  const saluranId = botConfig.saluran?.id || "120363186130999681@newsletter";
   const saluranName =
     botConfig.saluran?.name || botConfig.bot?.name || "Ourin-AI";
   const saluranLink = botConfig.saluran?.link || "";
@@ -454,12 +455,12 @@ async function handler(m, { sock, config: botConfig, db, uptime }) {
     console.error("Gagal load assets:", e.message);
   }
   const prefix = botConfig.command?.prefix || ".";
-  const saluranId = botConfig.saluran?.id || "120363400911374213@newsletter";
+  const saluranId = botConfig.saluran?.id || "120363186130999681@newsletter";
   const saluranName =
     botConfig.saluran?.name || botConfig.bot?.name || "Ourin-AI";
   const saluranLink =
     botConfig.saluran?.link ||
-    "https://whatsapp.com/channel/0029VbB37bgBfxoAmAlsgE0t";
+    "https://whatsapp.com/channel/0029VaBOlsv002TEjlntTE2D";
   const {
     sorted: menuSorted,
     totalCmds,
@@ -503,6 +504,10 @@ async function handler(m, { sock, config: botConfig, db, uptime }) {
 │ ◈ *Koin* : *${user.koin || 0}*
 │ ◈ *Register* : *${user.isRegistered ? "Sudah" : "Belum"}*
 │ ◈ *Energi* : *${user.energi || 0}*
+╰┈┈┈┈┈┈┈┈
+
+╭┈┈ NEED PANEL & SEWABOT? 
+│ ◈ https://fallxd-store-alpha.vercel.app
 ╰┈┈┈┈┈┈┈┈
 
 Tekan tombol dibawah untuk info lebih lanjut dan untuk memilih kategori
@@ -604,6 +609,9 @@ Welcome to ${config.bot?.name}, Our bot will help you
 > 🎏 *Koin*: ${user.koin || 0}
 > 🍬 *Register*: ${user.isRegistered ? "Sudah" : "Belum"}
 
+╭┈┈ NEED PANEL & SEWABOT? 
+│ ◈ https://fallxd-store-alpha.vercel.app
+╰┈┈┈┈┈┈┈┈
 ${readmore}${s}`
                   },
                   footer: {
@@ -709,6 +717,10 @@ Welcome to ${config.bot?.name}, Our bot will help you
 > 👨‍💻 *Developer*: ${config.bot?.developer}
 > 🧩 *Library*: \`ourin-baileys\`
 
+╭┈┈ NEED PANEL & SEWABOT? 
+│ ◈ https://fallxd-store-alpha.vercel.app
+╰┈┈┈┈┈┈┈┈
+
 🍅 *USER INFORMATION*
 > 🧑 *Name*: ${m.pushName}
 > 🥐 *Role*: ${m?.isOwner ? "🔥 Owner" : m?.isPremium ? "👑 Premium" : "😊 User"}
@@ -800,6 +812,9 @@ Welcome to ${config.bot?.name}, Our bot will help you
 > 🍂 *Type*: \`Plugin x Cases\`
 > 🦴 *Mode*: *${config.mode === 'public' ? '🍕 Unlock for everyone' : '🥖 Only for Owner'}*
 
+╭┈┈ NEED PANEL & SEWABOT? 
+│ ◈ https://fallxd-store-alpha.vercel.app
+╰┈┈┈┈┈┈┈┈
 Enjoy your use brother.`
                 },
                 contextInfo: {
@@ -1210,8 +1225,8 @@ I'm ${botName}, your intelligent assistant powered by ${config.bot?.developer}. 
         case7Text += `││  energi : ${userLimit}\n`;
         case7Text += `╰╯\n\n`;
 
-        case7Text += `[ 🌐 READY PANEL LEGAL ]\n`;
-        case7Text += `zanspiwpteroshoppanel.my.id\n\n`;
+        case7Text += `[ 🌐 NEDD PANEL & RENAME?]\n`;
+        case7Text += `fallxd-store-alpha.vercel.app\n\n`;
 
         const readmore = String.fromCharCode(8206).repeat(4001);
         case7Text += readmore + "";
