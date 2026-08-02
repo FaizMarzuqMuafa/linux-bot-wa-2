@@ -1,14 +1,15 @@
 {
-  "commandsExecuted": 20,
+  "commandsExecuted": 25,
   "command_self": 2,
-  "command_addown": 1,
+  "command_addown": 2,
   "command_allmenu": 1,
   "command_bratimg": 5,
   "command_brat": 2,
   "dailyResets": 1,
-  "command_ping": 2,
+  "command_ping": 4,
   "command_danafake": 1,
   "command_ganti-asset": 1,
   "command_playch": 4,
-  "command_bratcewek": 1
+  "command_bratcewek": 1,
+  "command_swgc": 2
 }
