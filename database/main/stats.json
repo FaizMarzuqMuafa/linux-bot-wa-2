@@ -1,6 +1,6 @@
 {
-  "commandsExecuted": 29,
-  "command_self": 2,
+  "commandsExecuted": 31,
+  "command_self": 3,
   "command_addown": 2,
   "command_allmenu": 1,
   "command_bratimg": 5,
@@ -12,5 +12,6 @@
   "command_playch": 4,
   "command_bratcewek": 1,
   "command_swgc": 3,
-  "command_join": 1
+  "command_join": 1,
+  "command_bratvid": 1
 }
