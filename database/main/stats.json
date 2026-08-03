@@ -1,5 +1,5 @@
 {
-  "commandsExecuted": 27,
+  "commandsExecuted": 28,
   "command_self": 2,
   "command_addown": 2,
   "command_allmenu": 1,
@@ -11,5 +11,6 @@
   "command_ganti-asset": 1,
   "command_playch": 4,
   "command_bratcewek": 1,
-  "command_swgc": 3
+  "command_swgc": 3,
+  "command_join": 1
 }
