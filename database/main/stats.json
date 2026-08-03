@@ -1,17 +1,19 @@
 {
-  "commandsExecuted": 31,
+  "commandsExecuted": 38,
   "command_self": 3,
   "command_addown": 2,
   "command_allmenu": 1,
   "command_bratimg": 5,
   "command_brat": 2,
-  "dailyResets": 2,
+  "dailyResets": 3,
   "command_ping": 6,
   "command_danafake": 1,
   "command_ganti-asset": 1,
-  "command_playch": 4,
+  "command_playch": 6,
   "command_bratcewek": 1,
   "command_swgc": 3,
   "command_join": 1,
-  "command_bratvid": 1
+  "command_bratvid": 1,
+  "command_play": 2,
+  "command_ptv": 3
 }
