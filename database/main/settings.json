@@ -27,7 +27,7 @@
   "publicAdmin": false,
   "_lastEnergiDefault": 99999,
   "_lastEnergiPremium": 99999999,
-  "lastLimitReset": "2026-08-04T17:00:00.027Z",
+  "lastLimitReset": "2026-08-05T17:00:00.004Z",
   "onlyThisGroup": null,
   "autoJpm": {
     "enabled": false,
@@ -4549,7 +4549,7 @@
     },
     "6283175590479@s.whatsapp.net": {
       "jid": "6283175590479@s.whatsapp.net",
-      "name": "🤨"
+      "name": "Bilz store"
     },
     "628813706809@s.whatsapp.net": {
       "jid": "628813706809@s.whatsapp.net",
@@ -6193,7 +6193,7 @@
     },
     "6285166245863@s.whatsapp.net": {
       "jid": "6285166245863@s.whatsapp.net",
-      "name": "JASA SUNTIK ALL SOSMED VNZ"
+      "name": "JASA SUNTIK ALL SOSMED AMRZ"
     },
     "628891761766@s.whatsapp.net": {
       "jid": "628891761766@s.whatsapp.net",
@@ -7050,6 +7050,22 @@
     "6285842029728@s.whatsapp.net": {
       "jid": "6285842029728@s.whatsapp.net",
       "name": "HANZZ JASJOK"
+    },
+    "6283168796243@s.whatsapp.net": {
+      "jid": "6283168796243@s.whatsapp.net",
+      "name": "jualanakuh"
+    },
+    "6288228790190@s.whatsapp.net": {
+      "jid": "6288228790190@s.whatsapp.net",
+      "name": "bay"
+    },
+    "6285735800917@s.whatsapp.net": {
+      "jid": "6285735800917@s.whatsapp.net",
+      "name": "panzzsda"
+    },
+    "6283130124266@s.whatsapp.net": {
+      "jid": "6283130124266@s.whatsapp.net",
+      "name": "---"
     }
   },
   "notiflimit": false,
