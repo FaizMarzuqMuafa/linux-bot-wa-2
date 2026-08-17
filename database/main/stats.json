@@ -1,5 +1,5 @@
 {
-  "commandsExecuted": 64,
+  "commandsExecuted": 65,
   "command_self": 4,
   "command_addown": 2,
   "command_allmenu": 1,
@@ -16,6 +16,6 @@
   "command_bratvid": 1,
   "command_play": 2,
   "command_ptv": 3,
-  "command_tt": 4,
+  "command_tt": 5,
   "command_menu": 2
 }
