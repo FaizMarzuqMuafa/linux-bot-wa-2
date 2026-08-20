@@ -280,14 +280,14 @@
     "access": []
   },
   "62881011965054": {
-    "name": "Michael",
-    "lastSeen": "2026-08-20T03:57:11.580Z",
+    "name": "Channel",
+    "lastSeen": "2026-08-20T08:49:21.360Z",
     "jid": "62881011965054",
     "number": "62881011965054",
     "energi": 99999,
     "isPremium": false,
     "isBanned": false,
-    "exp": 15015,
+    "exp": 15270,
     "level": 1,
     "koin": 0,
     "saldo": 0,
