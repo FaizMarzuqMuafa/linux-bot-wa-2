@@ -1,5 +1,5 @@
 {
-  "commandsExecuted": 72,
+  "commandsExecuted": 81,
   "command_self": 4,
   "command_addown": 3,
   "command_allmenu": 1,
@@ -11,12 +11,18 @@
   "command_ganti-asset": 1,
   "command_playch": 15,
   "command_bratcewek": 1,
-  "command_swgc": 6,
+  "command_swgc": 7,
   "command_join": 1,
   "command_bratvid": 1,
   "command_play": 2,
   "command_ptv": 3,
   "command_tt": 7,
-  "command_menu": 3,
-  "command_s": 3
+  "command_menu": 4,
+  "command_s": 3,
+  "command_swm": 1,
+  "command_berita": 1,
+  "command_cnn": 1,
+  "command_sindonews": 1,
+  "command_ephoto": 1,
+  "command_glitchtext": 2
 }
