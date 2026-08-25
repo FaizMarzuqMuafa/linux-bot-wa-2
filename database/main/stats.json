@@ -1,5 +1,5 @@
 {
-  "commandsExecuted": 85,
+  "commandsExecuted": 86,
   "command_self": 4,
   "command_addown": 3,
   "command_allmenu": 1,
@@ -24,5 +24,6 @@
   "command_cnn": 1,
   "command_sindonews": 1,
   "command_ephoto": 1,
-  "command_glitchtext": 2
+  "command_glitchtext": 2,
+  "command_ttmp3": 1
 }
