@@ -1,9 +1,9 @@
 {
-  "commandsExecuted": 90,
+  "commandsExecuted": 91,
   "command_self": 4,
   "command_addown": 3,
   "command_allmenu": 1,
-  "command_bratimg": 6,
+  "command_bratimg": 7,
   "command_brat": 3,
   "dailyResets": 26,
   "command_ping": 14,
@@ -26,5 +26,5 @@
   "command_ephoto": 1,
   "command_glitchtext": 2,
   "command_ttmp3": 1,
-  "commandErrors": 1
+  "commandErrors": 2
 }
