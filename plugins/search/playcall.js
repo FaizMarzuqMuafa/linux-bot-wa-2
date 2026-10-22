@@ -3,126 +3,89 @@ import yts from "yt-search";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-import te from "../../src/lib/ourin-error.js";
-import ytdl from "../../src/scraper/ytdl.js";
+import config from "../../config.js";
 
 const pluginConfig = {
   name: "playcall",
-  alias: ["telepon", "call", "playvn"],
+  alias: ["telepon", "call"],
   category: "search",
-  description: "Memutar musik dari YouTube lewat panggilan suara WhatsApp",
-  usage: ".playcall <judul lagu>",
+  description: "Putar musik dari YouTube lewat telpon",
+  usage: ".playcall <query>",
   example: ".playcall komang",
-  isOwner: false,
-  isPremium: false,
-  isGroup: false,
-  isPrivate: false,
   cooldown: 15,
   energi: 2,
-  isEnabled: false,
+  isEnabled: true,
 };
 
-async function downloadAudio(videoUrl) {
-  try {
-    const { data } = await axios.get(
-      `https://my.izuka-api.xyz/api/downloader/ytmp3?url=${encodeURIComponent(videoUrl)}`,
-      { timeout: 60000 }
-    );
-    const download = data?.result?.download_url;
-    if (download) return download;
-  } catch { }
-
-  const fallback = await ytdl(videoUrl, "mp3");
-  if (fallback?.status && fallback?.dl) return fallback.dl;
-
-  throw new Error("Gagal mendapatkan URL audio");
-}
-
-
 async function handler(m, { sock, text }) {
-  const query = (text || m.text || "").trim();
-
-  if (!query) {
-    return m.reply(
-      `⚠️ *PANGGILAN MUSIK (PLAYCALL)*\n\n` +
-      `Fitur ini digunakan untuk memutar musik YouTube langsung melalui panggilan telepon suara WhatsApp ke nomor kamu.\n\n` +
-      `*PENGGUNAAN:*\n` +
-      `- *${m.prefix}playcall <judul lagu>*\n\n` +
-      `*CONTOH:*\n` +
-      `- *${m.prefix}playcall surat cinta untuk starla*\n` +
-      `- *${m.prefix}playcall komang*\n\n` +
-      `_Pastikan nomormu dapat menerima panggilan suara WhatsApp._`
-    );
-  }
+  const query = m.text?.trim();
+  if (!query)
+    return m.reply(`🎵 *ᴘʟᴀʏ ᴄᴀʟʟ*\n\n> Masukkan judul lagunya\n\`Contoh: ${m.prefix}playcall surat cinta untuk starla\``);
 
   if (!global.voipClient) {
-    return m.reply(
-      `⚠️ *LAYANAN BELUM SIAP*\n\n` +
-      `Modul panggilan suara VoIP belum aktif atau sedang dalam proses inisialisasi pada server.`
-    );
+    return m.reply("Fitur panggilan suara tidak diaktifkan (VoipClient belum ready).");
   }
 
-  await m.react("🕕");
-
-  const tmpDir = path.join(process.cwd(), "tmp");
-  if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
-  const tmpFile = path.join(tmpDir, `call_${crypto.randomBytes(4).toString("hex")}.mp3`);
+  m.react("📞");
 
   try {
+    console.log("[PlayCall] Searching for:", query);
+    
     const search = await yts(query);
-    if (!search.videos.length) {
-      await m.react("❌");
-      return m.reply(`❌ Musik dengan judul *${query}* tidak ditemukan.`);
+    if (!search.videos.length) throw new Error("Video tidak ditemukan");
+    const video = search.videos[0];
+    
+    const res = await axios.get(`https://api.azbry.com/api/download/ytmp3?url=${encodeURIComponent(video.url)}`, { timeout: 60000 });
+    const data = res.data;
+    
+    if (!data.status || !data.result || !data.result.download) {
+       throw new Error("Gagal mengambil audio dari API");
+    }
+    
+    await m.react("🕕")
+    
+    console.log("[PlayCall] Downloading audio from:", data.result.download);
+    const audioRes = await axios.get(data.result.download, { responseType: "arraybuffer", timeout: 60000 });
+    const audioBuffer = Buffer.from(audioRes.data);
+    
+    console.log("[PlayCall] Audio downloaded successfully, buffer size:", audioBuffer.length);
+
+    const tmpDir = path.join(process.cwd(), "tmp");
+    if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir);
+    const tmpFile = path.join(tmpDir, `call_${crypto.randomBytes(4).toString("hex")}.mp3`);
+    fs.writeFileSync(tmpFile, audioBuffer);
+
+    let call;
+    const targetNumber = m.sender.split("@")[0];
+
+    if (m.isGroup) {
+      await m.reply(`_📞 Panggilan grup tidak didukung oleh library saat ini. Memanggil nomormu secara privat (${targetNumber})..._`);
+    } else {
+      await m.reply(`_📞 Memanggil nomormu (${targetNumber})..._`);
     }
 
-    const video = search.videos[0];
-    const audioUrl = await downloadAudio(video.url);
-
-    const audioRes = await axios.get(audioUrl, {
-      responseType: "arraybuffer",
-      timeout: 60000,
-    });
-    fs.writeFileSync(tmpFile, Buffer.from(audioRes.data));
-
-    const targetNumber = m.sender.split("@")[0].replace(/\D/g, "");
-
-    await m.react("📞");
-    await m.reply(
-      `📞 *MEMULAI PANGGILAN*\n\n` +
-      `- Judul: *${video.title}*\n` +
-      `- Durasi: *${video.timestamp}*\n` +
-      `- Tujuan: *+${targetNumber}*\n\n` +
-      `_Panggilan sedang dialihkan ke WhatsApp kamu, silakan angkat telepon untuk mendengarkan lagu._`
-    );
-
-    const call = await global.voipClient.call(targetNumber, {
+    call = await global.voipClient.call(targetNumber, {
       audioSource: tmpFile,
-      durationMs: 300000,
+      durationMs: 300000
     });
 
     call.on("connected", () => {
-      m.reply(`✅ *TERHUBUNG*\n\nPanggilan berhasil tersambung! Lagu *${video.title}* sedang diputar di telepon.`);
+      m.reply(`✅ *TERHUBUNG*\nLagu *${video.title}* sedang diputar di telpon!`);
     });
 
     call.on("ended", (reason) => {
-      try {
-        if (fs.existsSync(tmpFile)) fs.unlinkSync(tmpFile);
-      } catch { }
-      m.reply(`📵 *PANGGILAN BERAKHIR*\n\nPanggilan telepon telah selesai (${reason || "selesai"}).`);
+      if (fs.existsSync(tmpFile)) fs.unlinkSync(tmpFile);
+      m.reply(`📵 Panggilan diakhiri: ${reason}`);
     });
 
-    call.on("error", () => {
-      try {
-        if (fs.existsSync(tmpFile)) fs.unlinkSync(tmpFile);
-      } catch { }
+    call.on("error", (err) => {
+      console.error("[VoIP Call Error]", err);
     });
+
   } catch (err) {
-    try {
-      if (fs.existsSync(tmpFile)) fs.unlinkSync(tmpFile);
-    } catch { }
-    await m.react("☢");
-    console.log(err)
-    m.reply(te(m.prefix, m.command, m.pushName));
+    console.error("[PlayCall]", err);
+    m.react("😭");
+    m.reply(`Gagal menelpon / memainkan lagu: ${err.message}`);
   }
 }
 

@@ -354,6 +354,11 @@ async function main() {
 
     onConnectionUpdate: async (update, sock) => {
       if (update.connection === "open") {
+        try {
+          await initializeOurinAntiban(sock);
+        } catch (error) {
+          logger.error("ANTIBAN", `Gagal inisialisasi: ${error.message}`);
+        }
         logConnection("connected", sock.user?.name || "Bot");
         loadScheduledMessages(sock);
         startGroupScheduleChecker(sock);

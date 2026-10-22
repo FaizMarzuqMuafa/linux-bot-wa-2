@@ -431,7 +431,7 @@ function getVerifiedQuoted(botConfig, m) {
 
 async function handler(m, { sock, config: botConfig, db, uptime }) {
   const savedVariant = db.setting("menuVariant");
-  const menuVariant = savedVariant || botConfig.ui?.menuVariant || 2;
+  const menuVariant = savedVariant || botConfig.ui?.menuVariant || 1;
   const groupData = m.isGroup ? db.getGroup(m.chat) || {} : {};
   const botMode = groupData.botMode || "md";
   const text = await buildMenuText(
@@ -470,94 +470,269 @@ async function handler(m, { sock, config: botConfig, db, uptime }) {
   const user = await db.getUser(m.sender) || {}
   try {
     const categories = getSortedCategories(m, botMode);
-    const zann_pengin_rehat = categories.sorted.map(({ cat, cmds, emoji }) => {
-      return {
-        title: `${emoji} ${toMonoUpperBold(cat)}`,
-        description: `Command ini memiliki  (${cmds.length}) Perintah`,
-        id: `${m.prefix}menucat ${cat}`,
-      };
+    const availableCats = new Set(categories.sorted.map(({ cat }) => cat.toLowerCase()));
+    const categoryMeta = [
+      { key: "owner", label: "Owner Menu", emoji: "👑", type: "category" },
+      { key: "main", label: "Main Menu", emoji: "🏠", type: "command", command: "menu" },
+      { key: "utility", label: "Utility", emoji: "🔧", type: "category" },
+      { key: "tools", label: "Tools", emoji: "🛠️", type: "category" },
+      { key: "fun", label: "Fun", emoji: "🎮", type: "category" },
+      { key: "game", label: "Game", emoji: "🎯", type: "category" },
+      { key: "newgame", label: "New Game", emoji: "🆕", type: "command", command: "gamenew" },
+      { key: "download", label: "Download", emoji: "📥", type: "category" },
+      { key: "search", label: "Search", emoji: "🔍", type: "category" },
+      { key: "sticker", label: "Sticker", emoji: "🖼️", type: "category" },
+      { key: "media", label: "Media", emoji: "🎬", type: "category" },
+      { key: "ai", label: "AI", emoji: "🤖", type: "category" },
+      { key: "group", label: "Group", emoji: "👥", type: "category" },
+      { key: "religi", label: "Religi", emoji: "☪️", type: "category" },
+      { key: "info", label: "Info Bot", emoji: "ℹ️", type: "category" },
+      { key: "cek", label: "Cek", emoji: "📋", type: "category" },
+      { key: "user", label: "User", emoji: "👤", type: "category" },
+      { key: "canvas", label: "Canvas", emoji: "🎨", type: "category" },
+      { key: "random", label: "Random", emoji: "🎲", type: "category" },
+      { key: "ephoto", label: "Ephoto", emoji: "✨", type: "category" },
+      { key: "jpm", label: "JPM", emoji: "📢", type: "category" },
+      { key: "asupan", label: "Asupan", emoji: "🍑", type: "category" },
+      { key: "maker", label: "Maker", emoji: "🧰", type: "category" },
+      { key: "clan", label: "Clan", emoji: "⚔️", type: "category" },
+      { key: "convert", label: "Convert Song", emoji: "🔄", type: "category" },
+      { key: "download", label: "Downloader", emoji: "⬇️", type: "category" },
+      { key: "info", label: "Berita", emoji: "📰", type: "category" },
+      { key: "islamic", label: "Islamic", emoji: "🕌", type: "category" },
+      { key: "rpg", label: "RPG", emoji: "🗡️", type: "category" },
+      { key: "nsfw", label: "NSFW", emoji: "🔞", type: "category" },
+      { key: "linode", label: "Linode", emoji: "☁️", type: "category" },
+      { key: "primbon", label: "Primbon", emoji: "🔮", type: "category" },
+      { key: "cecan", label: "Cecan", emoji: "💃", type: "category" },
+      { key: "stalker", label: "Stalker", emoji: "🕵️", type: "category" },
+      { key: "tts", label: "TTS", emoji: "🗣️", type: "category" },
+      { key: "vps", label: "VPS", emoji: "🌊", type: "category" },
+    ];
+    const seenRows = new Set();
+    const zann_pengin_rehat = categoryMeta.flatMap((item) => {
+      if (item.key === "owner" && !m.isOwner) return [];
+      if (item.type === "category" && !availableCats.has(item.key)) return [];
+      const id = item.type === "command" ? `${m.prefix}${item.command}` : `${m.prefix}menucat ${item.key}`;
+      if (seenRows.has(id)) return [];
+      seenRows.add(id);
+      const count = item.type === "category" ? (categories.sorted.find(x => x.cat.toLowerCase() === item.key)?.cmds.length || 0) : 0;
+      return [{
+        title: `${item.emoji} ${item.label}`,
+        description: count ? `${count} command tersedia` : "Buka menu ini",
+        id,
+      }];
     });
     switch (menuVariant) {
       case 1:
         if (imageBuffer) {
+          const displayName = m.pushName || "Pengguna";
+          const mention = `@${m.sender.split("@")[0]}`;
+          const statusText = m?.isOwner
+            ? "𝗕𝘂𝗸𝗮𝗻, 𝘁𝗮𝗽𝗶 𝗢𝘄𝗻𝗲𝗿"
+            : m?.isPremium
+              ? "𝗕𝘂𝗸𝗮𝗻, 𝘁𝗮𝗽𝗶 𝗣𝗿𝗲𝗺𝗶𝘂𝗺"
+              : "𝗣𝗲𝗻𝗴𝗴𝘂𝗻𝗮";
+          const userName = toMonoUpperBold(displayName);
+          const botName = botConfig.bot?.name || "𝗢𝗨𝗥𝗜𝗡 𝗗𝗘𝗟𝗨𝗫𝗘";
+          const botVersion = botConfig.bot?.version || "3.4";
+          const developer = botConfig.bot?.developer || "Zann";
+          const userLevel = user?.level || 0;
+          const userExp = user?.exp || 0;
+          const userEnergi = user?.energi ?? 0;
+          const userKoin = user?.koin ?? 0;
+          const registered = user?.isRegistered ? "𝗦𝘂𝗱𝗮𝗵" : "𝗕𝗲𝗹𝘂𝗺";
+
+          const menuCaption =
+            `𝗛𝗮𝗶 ${mention} 👋\n\n` +
+            `🌿 𝗦𝗲𝗹𝗮𝗺𝗮𝘁 𝗱𝗮𝘁𝗮𝗻𝗴 𝗱𝗶 𝗮𝘀𝘀𝗶𝘀𝘁𝗮𝗻𝘁\n` +
+            `𝗢𝗨𝗥𝗜𝗡 𝗗𝗘𝗟𝗨𝗫𝗘\n\n` +
+            `╭┈┈⫹⫺ 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗦𝗜 𝗕𝗢𝗧 ⫹⫺┈┈╮\n` +
+            `│ ◈ 𝗡𝗮𝗺𝗮 𝗕𝗼𝘁 : 𝗢𝗨𝗥𝗜𝗡 𝗗𝗘𝗟𝗨𝗫𝗘\n` +
+            `│ ◈ 𝗩𝗲𝗿𝘀𝗶 : ${botVersion}\n` +
+            `│ ◈ 𝗣𝗲𝗻𝗴𝗲𝗺𝗯𝗮𝗻𝗴 : ${developer}\n` +
+            `│ ◈ 𝗣𝘂𝘀𝘁𝗮𝗸𝗮 : ourin-baileys\n` +
+            `╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯\n\n` +
+            `╭┈┈⫹⫺ 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗦𝗜 𝗣𝗘𝗡𝗚𝗚𝗨𝗡𝗔 ⫹⫺┈┈╮\n` +
+            `│ ◈ 𝗡𝗮𝗺𝗮 : ${userName}\n` +
+            `│ ◈ 𝗦𝘁𝗮𝘁𝘂𝘀 : ${statusText}\n` +
+            `│ ◈ 𝗟𝗲𝘃𝗲𝗹 : ${userLevel}\n` +
+            `│ ◈ 𝗘𝘅𝗽 : ${userExp}\n` +
+            `│ ◈ 𝗘𝗻𝗲𝗿𝗴𝗶 : ${userEnergi}\n` +
+            `│ ◈ 𝗞𝗼𝗶𝗻 : ${userKoin}\n` +
+            `│ ◈ 𝗥𝗲𝗴𝗶𝘀𝘁𝗲𝗿 : ${registered}\n` +
+            `╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯\n\n` +
+            `𝗣𝗶𝗹𝗶𝗵 𝗸𝗮𝘁𝗲𝗴𝗼𝗿𝗶 𝗺𝗲𝗻𝘂 𝗱𝗶 𝗯𝗮𝘄𝗮𝗵 𝘂𝗻𝘁𝘂𝗸 𝗺𝗲𝗹𝗶𝗵𝗮𝘁 𝗱𝗮𝗳𝘁𝗮𝗿 𝗰𝗼𝗺𝗺𝗮𝗻𝗱.`;
+
           await sock.sendMessage(m.chat, {
-            image: fs.readFileSync(config.assets["ourin"]),
-            caption: ``,
-            footer: `Hai @${m.pushName} 👋
-            
-🌿 Selamat datang di assistant ${config.bot?.name}
-
-╭┈┈⫹⫺ *INFORMASI BOT* ⫹⫺┈┈╮
-│ ◈ *Nama Bot* : *${config.bot?.name}*
-│ ◈ *Versi* : *${config.bot.version}*  
-│ ◈ *Pengembang* : *${config.bot.developer}*  
-│ ◈ *Pustaka* : \`ourin-baileys\`
-╰┈┈┈┈┈┈┈┈
-
-╭┈┈⫹⫺ *INFORMASI PENGGUNA* ⫹⫺┈┈╮
-│ ◈ *Nama* : *${m.pushName}*
-│ ◈ *Member?* : *${m?.isOwner ? "Bukan, tapi Owner" : m?.isPremium ? "Bukan, tapi Premium" : "Iyapp"}*
-│ ◈ *Level* : *${user.level || 0}*
-│ ◈ *Exp* : *${user.exp || 0}* 
-│ ◈ *Energi* : *${user.energi || 0}*
-│ ◈ *Koin* : *${user.koin || 0}*
-│ ◈ *Register* : *${user.isRegistered ? "Sudah" : "Belum"}*
-│ ◈ *Energi* : *${user.energi || 0}*
-╰┈┈┈┈┈┈┈┈
-
-Tekan tombol dibawah untuk info lebih lanjut dan untuk memilih kategori
-`,
+            image: fs.readFileSync(
+              botConfig.assets["ourin-menu-header-blue"] || botConfig.assets["ourin"],
+            ),
+            caption: menuCaption,
+            footer: `𝗢𝗨𝗥𝗜𝗡 𝗗𝗘𝗟𝗨𝗫𝗘 • 𝗩${botVersion}`,
             interactiveButtons: [
               {
                 name: "single_select",
                 buttonParamsJson: JSON.stringify({
-                  title: "🍃 Menu Utama",
+                  title: "🍃 𝗠𝗲𝗻𝘂 𝗨𝘁𝗮𝗺𝗮",
                   sections: [
                     {
-                      title: "Berikut adalah pilihan nya",
-                      rows: zann_pengin_rehat
-                    }
+                      title: "𝗣𝗶𝗹𝗶𝗵 𝗸𝗮𝘁𝗲𝗴𝗼𝗿𝗶",
+                      rows: zann_pengin_rehat,
+                    },
                   ],
-                  icon: "DEFAULT"
-                })
+                  icon: "DEFAULT",
+                }),
               },
               {
                 name: "single_select",
                 buttonParamsJson: JSON.stringify({
-                  title: "Selengkapnya",
+                  title: "✨ 𝗦𝗲𝗹𝗲𝗻𝗴𝗸𝗮𝗽𝗻𝘆𝗮",
                   sections: [
                     {
-                      title: "Berikut adalah pilihan nya",
+                      title: "𝗣𝗶𝗹𝗶𝗵 𝗺𝗲𝗻𝘂",
                       rows: [
                         {
-                          title: "🍔 Lihat semua menu yang ada di bot ini",
-                          description: "Silahkan tap lalu kirim",
-                          id: `${m.prefix}sc`
+                          title: "📚 𝗦𝗲𝗺𝘂𝗮 𝗠𝗲𝗻𝘂",
+                          description: "Lihat seluruh command yang tersedia",
+                          id: `${m.prefix}allmenu`,
                         },
                         {
-                          title: "🥰 Kamu mau samaan kayak bot ini?",
-                          description: "Silahkan tap lalu kirim, nanti bot akan mengirimkan sebuah link download",
-                          id: `${m.prefix}sc`
+                          title: "🆕 𝗡𝗲𝘄 𝗚𝗮𝗺𝗲",
+                          description: "Chess • Dino • MBIM • Plane • TTC",
+                          id: `${m.prefix}gamenew`,
                         },
                         {
-                          title: "🌾 Siapakah owner dari bot ini?",
-                          description: "Tap dan klik kirim untuk melanjutkan",
-                          id: `${m.prefix}owner`
+                          title: "👑 𝗢𝘄𝗻𝗲𝗿",
+                          description: "Informasi owner bot",
+                          id: `${m.prefix}owner`,
                         },
-                      ]
-                    }
+                      ],
+                    },
                   ],
-                  icon: "REVIEW"
-                })
+                  icon: "REVIEW",
+                }),
               },
-            ]
+            ],
           }, {
             quoted: getVerifiedQuoted(botConfig, m),
-          })
+            mentions: [m.sender],
+          });
         } else {
           await m.reply(text);
         }
         break;
+      case 9: {
+        // V9: gambar header + caption native + native WhatsApp list buttons.
+        // Data pengguna selalu berasal dari m.sender agar setiap orang melihat datanya sendiri.
+        const displayName = m.pushName || "Pengguna";
+        const mention = `@${m.sender.split("@")[0]}`;
+        const botName = botConfig.bot?.name || "OURIN DELUXE";
+        const botVersion = botConfig.bot?.version || "3.4";
+        const developer = botConfig.bot?.developer || "Zann";
+        const userLevel = user?.level ?? 0;
+        const userExp = user?.exp ?? 0;
+        const userEnergi = user?.energi ?? 0;
+        const userKoin = user?.koin ?? 0;
+        const registered = user?.isRegistered ? "𝗦𝘂𝗱𝗮𝗵" : "𝗕𝗲𝗹𝘂𝗺";
+        const role = m.isOwner ? "𝗕𝘂𝗸𝗮𝗻, 𝘁𝗮𝗽𝗶 𝗢𝘄𝗻𝗲𝗿" : m.isPremium ? "𝗣𝗿𝗲𝗺𝗶𝘂𝗺" : "𝗨𝘀𝗲𝗿";
+
+        const menuCaption =
+          `𝗛𝗮𝗶 ${mention} 👋\n\n` +
+          `🌿 𝗦𝗲𝗹𝗮𝗺𝗮𝘁 𝗱𝗮𝘁𝗮𝗻𝗴 𝗱𝗶 𝗮𝘀𝘀𝗶𝘀𝘁𝗮𝗻𝘁\n` +
+          `𝗢𝗨𝗥𝗜𝗡 𝗗𝗘𝗟𝗨𝗫𝗘\n\n` +
+          `╭┈┈⫹⫺ 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗦𝗜 𝗕𝗢𝗧 ⫹⫺┈┈╮\n` +
+          `│ ◈ 𝗡𝗮𝗺𝗮 𝗕𝗼𝘁 : ${botName}\n` +
+          `│ ◈ 𝗩𝗲𝗿𝘀𝗶 : ${botVersion}\n` +
+          `│ ◈ 𝗣𝗲𝗻𝗴𝗲𝗺𝗯𝗮𝗻𝗴 : ${developer}\n` +
+          `│ ◈ 𝗣𝘂𝘀𝘁𝗮𝗸𝗮 : ourin-baileys\n` +
+          `╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯\n\n` +
+          `╭┈┈⫹⫺ 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗦𝗜 𝗣𝗘𝗡𝗚𝗚𝗨𝗡𝗔 ⫹⫺┈┈╮\n` +
+          `│ ◈ 𝗡𝗮𝗺𝗮 : ${toMonoUpperBold(displayName)}\n` +
+          `│ ◈ 𝗦𝘁𝗮𝘁𝘂𝘀 : ${role}\n` +
+          `│ ◈ 𝗟𝗲𝘃𝗲𝗹 : ${userLevel}\n` +
+          `│ ◈ 𝗘𝘅𝗽 : ${userExp}\n` +
+          `│ ◈ 𝗘𝗻𝗲𝗿𝗴𝗶 : ${userEnergi}\n` +
+          `│ ◈ 𝗞𝗼𝗶𝗻 : ${userKoin}\n` +
+          `│ ◈ 𝗥𝗲𝗴𝗶𝘀𝘁𝗲𝗿 : ${registered}\n` +
+          `╰┈┈┈┈┈┈┈┈┈┈┈┈┈┈╯\n\n` +
+          `𝗧𝗲𝗸𝗮𝗻 𝘁𝗼𝗺𝗯𝗼𝗹 𝗱𝗶 𝗯𝗮𝘄𝗮𝗵 𝘂𝗻𝘁𝘂𝗸 𝗺𝗲𝗹𝗶𝗵𝗮𝘁 𝗱𝗮𝗳𝘁𝗮𝗿 𝗺𝗲𝗻𝘂.`;
+
+        const requested = [
+          ["owner", "👑", "Owner Menu"], ["main", "🏠", "Main Menu"],
+          ["utility", "🔧", "Utility"], ["tools", "🛠️", "Tools"],
+          ["fun", "🎮", "Fun"], ["game", "🎯", "Game"],
+          ["newgame", "🆕", "New Game"], ["download", "📥", "Download"],
+          ["search", "🔍", "Search"], ["sticker", "🖼️", "Sticker"],
+          ["media", "🎬", "Media"], ["ai", "🤖", "AI"],
+          ["group", "👥", "Group"], ["religi", "☪️", "Religi"],
+          ["info", "ℹ️", "Info Bot"], ["cek", "📋", "Cek"],
+          ["user", "👤", "User"], ["canvas", "🎨", "Canvas"],
+          ["random", "🎲", "Random"], ["ephoto", "✨", "Ephoto"],
+          ["jpm", "📢", "JPM"], ["asupan", "🍑", "Asupan"],
+          ["maker", "🧰", "Maker"], ["clan", "⚔️", "Clan"],
+          ["convert", "🔄", "Convert Song"], ["downloader", "⬇️", "Downloader"],
+          ["berita", "📰", "Berita"], ["islamic", "🕌", "Islamic"],
+          ["rpg", "🗡️", "RPG"], ["test", "🧪", "Test"],
+          ["nsfw", "🔞", "NSFW"], ["linode", "☁️", "Linode"],
+          ["primbon", "🔮", "Primbon"], ["cecan", "💃", "Cecan"],
+          ["stalker", "🕵️", "Stalker"], ["tts", "🗣️", "TTS"],
+          ["vps", "🌊", "VPS"],
+        ];
+
+        const rows = [];
+        for (const [key, emoji, label] of requested) {
+          if (key === "owner" && !m.isOwner) continue;
+          if (key === "newgame") {
+            rows.push({ title: `${emoji} 𝗡𝗲𝘄 𝗚𝗮𝗺𝗲`, description: "Chess • Dino • MBIM • Plane • TTC", id: `${prefix}gamenew` });
+            continue;
+          }
+          if (!availableCats.has(key)) continue;
+          const count = categories.sorted.find(x => x.cat.toLowerCase() === key)?.cmds.length || 0;
+          rows.push({ title: `${emoji} ${toMonoUpperBold(label)}`, description: `${count} command tersedia`, id: `${prefix}menucat ${key}` });
+        }
+
+        const sections = [];
+        for (let i = 0; i < rows.length; i += 10) {
+          sections.push({ title: `𝗠𝗘𝗡𝗨 ${Math.floor(i / 10) + 1}`, rows: rows.slice(i, i + 10) });
+        }
+        const buttons = [
+          {
+            name: "single_select",
+            buttonParamsJson: JSON.stringify({
+              title: "🍃 𝗠𝗲𝗻𝘂 𝗨𝘁𝗮𝗺𝗮",
+              sections,
+            }),
+          },
+          {
+            name: "quick_reply",
+            buttonParamsJson: JSON.stringify({
+              display_text: "🆕 𝗡𝗲𝘄 𝗚𝗮𝗺𝗲",
+              id: `${prefix}gamenew`,
+            }),
+          },
+        ];
+
+        const imagePath = botConfig.assets?.["ourin-menu-header-blue"] || botConfig.assets?.ourin;
+        if (!imagePath || !fs.existsSync(imagePath)) {
+          await m.reply(menuCaption, { mentions: [m.sender] });
+          break;
+        }
+
+        await sock.sendButton(
+          m.chat,
+          fs.readFileSync(imagePath),
+          menuCaption,
+          m,
+          {
+            buttons,
+            footer: `𝗢𝗨𝗥𝗜𝗡 𝗗𝗘𝗟𝗨𝗫𝗘 • 𝗩${botVersion}`,
+            contextInfo: { mentionedJid: [m.sender] },
+          },
+        );
+        break;
+      }
+
       case 2:
         let s = ""
         categories.sorted.map(({ cat, cmds, emoji }) => {
@@ -1484,6 +1659,7 @@ I'm ${botName}, your intelligent assistant powered by ${config.bot?.developer}. 
         await sock.relayMessage(m.chat, msg.message, { messageId: msg.key.id });
         break;
       }
+
       default:
         await m.reply(text);
     }

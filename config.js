@@ -14,19 +14,20 @@ const config = {
   },
 
   session: {
-    pairingNumber: "6285187343572", // Nomor WA yang akan di-pair, ini penting
+    pairingNumber: "62881011965054", // Nomor WA yang akan di-pair, ini penting
     usePairingCode: true, // true = Pairing Code, false = QR Code
   },
 
+  // fitur ini buat fitur kayak playcall, tapi nanti disuruh pairing lagi
   fake_call: {
-    active: false,
+    active: true, // kalau true berarti sistem aktif dan bisa di pakai, kalau false berarti sistem tidak aktif dan tidak bisa di pakai
     usePairing: true,
     dir: "./session_voip",
   },
 
   bot: {
     name: "justfriend mania", // Nama bot
-    version: "3.3.1", // Versi bot
+    version: "3.4", // Versi bot
     developer: "pais", // Nama developer
   },
 
@@ -45,6 +46,8 @@ const config = {
     "ourin-v8": "./assets/image/ourin-v8.jpg",
     "ourin-winner": "./assets/image/ourin-winner.jpg",
     "ourin": "./assets/image/ourin.png",
+    "ourin-menu-blue": "./assets/image/ourin-menu-blue.jpg",
+    "ourin-menu-header-blue": "./assets/image/ourin-menu-header-blue.jpg",
     "ourin2": "./assets/image/ourin2.jpg",
     "ourin3": "./assets/image/ourin3.jpg",
     "pp-kosong": "./assets/image/pp-kosong.jpg",
@@ -105,8 +108,8 @@ const config = {
   },
 
   sticker: {
-    packname: "𝗢𝗨𝗥𝗜𝗡 𝗠𝗗", // Nama pack sticker
-    author: "Zann", // Author sticker
+    packname: "paiz", // Nama pack sticker
+    author: "pais tamvan", // Author sticker
   },
 
   saluran: {
@@ -163,7 +166,7 @@ const config = {
   goodbye: { defaultEnabled: false },
 
   ui: {
-    menuVariant: 3,
+    menuVariant: 9,
   },
 
   messages: {

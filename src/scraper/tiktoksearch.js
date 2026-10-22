@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const TTSEARCH_API = 'https://api.nexray.eu.cc/search/tiktok?q='
+const TTSEARCH_API = 'https://api.azbry.com/api/search/ttsearch?q='
 
 function normalizeUrl(url) {
     if (!url || typeof url !== 'string') return null
@@ -11,40 +11,27 @@ function normalizeUrl(url) {
 }
 
 function normalizeNumber(value) {
-    if (!value) return 0
-    if (typeof value === 'number') return value
-    const cleaned = String(value).replace(/[^0-9.KMB]/gi, '')
-    const num = parseFloat(cleaned)
-    if (!Number.isFinite(num)) return 0
-    const upper = String(value).toUpperCase()
-    if (upper.includes('B')) return Math.round(num * 1_000_000_000)
-    if (upper.includes('M')) return Math.round(num * 1_000_000)
-    if (upper.includes('K')) return Math.round(num * 1_000)
-    return Math.round(num)
+    const number = Number(value)
+    return Number.isFinite(number) ? number : 0
 }
 
 function normalizeItem(item) {
     return {
         title: item?.title || '',
         cover: normalizeUrl(item?.cover),
-        originCover: normalizeUrl(item?.cover),
-        link: normalizeUrl(item?.data),
-        watermarkLink: normalizeUrl(item?.data),
-        music: normalizeUrl(item?.music_info?.url),
-        duration: item?.duration || '',
-        region: item?.region || '',
-        id: item?.id || '',
+        originCover: normalizeUrl(item?.origin_cover),
+        link: normalizeUrl(item?.link),
+        watermarkLink: normalizeUrl(item?.watermark_link),
+        music: normalizeUrl(item?.music),
         author: {
-            nickname: item?.author?.nickname || item?.author?.fullname || '',
-            fullname: item?.author?.fullname || '',
+            nickname: item?.author?.nickname || '',
             avatar: normalizeUrl(item?.author?.avatar)
         },
         stats: {
-            plays: normalizeNumber(item?.stats?.views),
+            plays: normalizeNumber(item?.stats?.plays),
             likes: normalizeNumber(item?.stats?.likes),
-            comments: normalizeNumber(item?.stats?.comment),
-            shares: normalizeNumber(item?.stats?.share),
-            downloads: normalizeNumber(item?.stats?.download)
+            comments: normalizeNumber(item?.stats?.comments),
+            shares: normalizeNumber(item?.stats?.shares)
         }
     }
 }

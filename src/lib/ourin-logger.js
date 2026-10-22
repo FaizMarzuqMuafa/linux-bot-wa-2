@@ -131,7 +131,7 @@ async function runLoader(text = "memuat", options = {}) {
 }
 
 async function playBootSequence(info = {}) {
-  const { name = "OURIN", version = "3.3", mode = "public" } = info;
+  const { name = "OURIN", version = "3.4", mode = "public" } = info;
   console.log("");
   console.log(chalk.cyan(`
           ██████╗ ██╗   ██╗██████╗ ██╗███╗   ██╗

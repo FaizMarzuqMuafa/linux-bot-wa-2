@@ -67,6 +67,12 @@ const VARIANTS = {
     desc: "Thumbnail Image",
     emoji: "📍",
   },
+  v9: {
+    id: 9,
+    name: "BLUE NATIVE",
+    desc: "Gambar header biru + native WhatsApp menu",
+    emoji: "🔵",
+  },
 };
 
 async function handler(m, { sock, db }) {
@@ -75,7 +81,7 @@ async function handler(m, { sock, db }) {
   if (variant) {
     const selected = VARIANTS[variant];
     if (!selected) {
-      await m.reply(`❌ *VARIANT TIDAK VALID*\n\nGunakan: *v1* s/d *v7*`);
+      await m.reply(`❌ *VARIANT TIDAK VALID*\n\nGunakan: *v1* s/d *v9*`);
       return;
     }
     db.setting("menuVariant", selected.id);

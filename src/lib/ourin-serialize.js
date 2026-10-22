@@ -35,7 +35,6 @@ import sharp from "sharp";
 import fsc from "fs";
 import { getDatabase } from "./ourin-database.js";
 import { saluranCtx } from "./ourin-context.js";
-import { LRUCache } from "lru-cache";
 import { getAssetBuffer } from "./ourin-asset-manager.js";
 let _prefixCache = null;
 let _prefixCacheTime = 0;
@@ -66,11 +65,11 @@ function invalidatePrefixCache() {
   _prefixCacheTime = 0;
 }
 
-const _thumbCache = new LRUCache({ max: 50, ttl: 10 * 60 * 1000 });
+const _thumbCache = {};
 async function getCachedThumb(filePath) {
-  if (!filePath) return null;
-  if (_thumbCache.has(filePath)) return _thumbCache.get(filePath);
+  if (_thumbCache[filePath] !== undefined) return _thumbCache[filePath];
 
+  // Try AssetManager first if it's a known file name
   const basename = filePath ? filePath.split('/').pop().split('.')[0] : null;
   if (basename) {
     const assetBuf = getAssetBuffer(basename);
@@ -80,51 +79,42 @@ async function getCachedThumb(filePath) {
   try {
     if (filePath && filePath.startsWith("http")) {
       const res = await axios.get(filePath, { responseType: "arraybuffer", timeout: 5000 });
-      const buf = Buffer.from(res.data);
-      _thumbCache.set(filePath, buf);
-      return buf;
+      _thumbCache[filePath] = Buffer.from(res.data);
     } else if (fsc.existsSync(filePath)) {
-      const buf = fsc.readFileSync(filePath);
-      _thumbCache.set(filePath, buf);
-      return buf;
+      _thumbCache[filePath] = fsc.readFileSync(filePath);
     } else {
-      _thumbCache.set(filePath, null);
-      return null;
+      _thumbCache[filePath] = null;
     }
   } catch {
-    _thumbCache.set(filePath, null);
-    return null;
+    _thumbCache[filePath] = null;
   }
+  return _thumbCache[filePath];
 }
 
-const _sharpThumbCache = new LRUCache({ max: 50, ttl: 10 * 60 * 1000 });
+let _sharpThumbCache = {};
 let _sharpInstance = null;
 async function _getSharp() {
   if (!_sharpInstance) _sharpInstance = (await import("sharp")).default;
   return _sharpInstance;
 }
 async function getCachedSharpThumb(filePath, w, h) {
-  if (!filePath) return null;
   const key = `${filePath}_${w}x${h}`;
-  if (_sharpThumbCache.has(key)) return _sharpThumbCache.get(key);
+  if (_sharpThumbCache[key] !== undefined) return _sharpThumbCache[key];
   try {
     const raw = await getCachedThumb(filePath);
     if (raw) {
       const sharp = await _getSharp();
-      const buf = await sharp(raw).resize(w, h).toBuffer();
-      _sharpThumbCache.set(key, buf);
-      return buf;
+      _sharpThumbCache[key] = await sharp(raw).resize(w, h).toBuffer();
     } else {
-      _sharpThumbCache.set(key, null);
-      return null;
+      _sharpThumbCache[key] = null;
     }
   } catch {
-    _sharpThumbCache.set(key, null);
-    return null;
+    _sharpThumbCache[key] = null;
   }
+  return _sharpThumbCache[key];
 }
 
-const _ppCache = new LRUCache({ max: 100, ttl: 5 * 60 * 1000 });
+const _ppCache = new Map();
 const PP_CACHE_TTL = 5 * 60 * 1000;
 
 /**

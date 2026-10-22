@@ -4,7 +4,7 @@ import te from "../../src/lib/ourin-error.js";
 const pluginConfig = {
   name: "musicmaker",
   alias: ["bikinlagu", "suno"],
-  category: "ai",
+  category: "maker",
   description: "Membuat musik atau lagu menggunakan AI dari teks (prompt)",
   usage: ".musicmaker <prompt>",
   example: ".musicmaker Lagu sedih tentang perpisahan dengan musik piano",

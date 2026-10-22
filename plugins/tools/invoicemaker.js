@@ -4,7 +4,7 @@ import te from "../../src/lib/ourin-error.js";
 const pluginConfig = {
   name: "invoicemaker",
   alias: ["invoice", "faktur", "nota"],
-  category: "tools",
+  category: "maker",
   description: "Membuat invoice/nota penjualan",
   usage: ".invoicemaker <toko>|<invoice>|<tanggal>|<status>|<items>|<total>",
   example:

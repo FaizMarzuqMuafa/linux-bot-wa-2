@@ -4,7 +4,7 @@
   "ownerType": 2,
   "welcomeType": 7,
   "replyVariant": 11,
-  "menuVariant": 8,
+  "menuVariant": 9,
   "botAfk": {
     "active": false
   },
@@ -27,7 +27,7 @@
   "publicAdmin": false,
   "_lastEnergiDefault": 99999,
   "_lastEnergiPremium": 99999999,
-  "lastLimitReset": "2026-08-22T17:00:00.064Z",
+  "lastLimitReset": "2026-08-04T17:00:00.043Z",
   "onlyThisGroup": null,
   "autoJpm": {
     "enabled": false,
@@ -66,24 +66,7 @@
   "ownerNames": {},
   "publicGroups": [],
   "autoRead": false,
-  "contacts": {
-    "6283106414327@s.whatsapp.net": {
-      "jid": "6283106414327@s.whatsapp.net",
-      "name": "Zann"
-    },
-    "967739844829@s.whatsapp.net": {
-      "jid": "967739844829@s.whatsapp.net",
-      "name": "hyuLʏʀɪᴄ"
-    },
-    "6285196041670@s.whatsapp.net": {
-      "jid": "6285196041670@s.whatsapp.net",
-      "name": "what"
-    },
-    "6288994182258@s.whatsapp.net": {
-      "jid": "6288994182258@s.whatsapp.net",
-      "name": "_-"
-    }
-  },
+  "contacts": {},
   "notiflimit": false,
   "pgTopups": {},
   "pgPayments": {},

@@ -192,6 +192,7 @@ async function handler(m, { sock, db }) {
     });
 
     const visibleCats = sortedCats.filter((cat) => {
+      if (categoryArg && cat.toLowerCase() !== categoryArg) return false;
       if (cat === "owner" && !m.isOwner) return false;
       if (excludeCategories.includes(cat.toLowerCase())) return false;
       const total =
