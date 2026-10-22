@@ -16,7 +16,7 @@
   "onlyGc": false,
   "onlyPc": false,
   "giveaways": {},
-  "botMode": "public",
+  "botMode": "self",
   "audioMenu": true,
   "transactionSessions": {},
   "premiumUsers": [],
@@ -66,7 +66,20 @@
   "ownerNames": {},
   "publicGroups": [],
   "autoRead": false,
-  "contacts": {},
+  "contacts": {
+    "6288212949095@s.whatsapp.net": {
+      "jid": "6288212949095@s.whatsapp.net",
+      "name": "idk"
+    },
+    "6285187343572@s.whatsapp.net": {
+      "jid": "6285187343572@s.whatsapp.net",
+      "name": "Justin"
+    },
+    "62881011965054@s.whatsapp.net": {
+      "jid": "62881011965054@s.whatsapp.net",
+      "name": "Michael"
+    }
+  },
   "notiflimit": false,
   "pgTopups": {},
   "pgPayments": {},
