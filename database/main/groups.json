@@ -2,18 +2,18 @@
   "120363427618821749@g.us": {
     "chatStats": {
       "6288212949095@s.whatsapp.net": {
-        "count": 5,
-        "lastChat": 1792710697901,
+        "count": 9,
+        "lastChat": 1792738342560,
         "name": "idk"
       },
       "6285187343572@s.whatsapp.net": {
-        "count": 5,
-        "lastChat": 1792710701834,
+        "count": 10,
+        "lastChat": 1792738343928,
         "name": "Justin"
       },
       "62881011965054@s.whatsapp.net": {
-        "count": 5,
-        "lastChat": 1792710700387,
+        "count": 9,
+        "lastChat": 1792738343744,
         "name": "Michael"
       }
     },
@@ -45,8 +45,8 @@
     "chat": {},
     "chatStats": {
       "6285813708397@s.whatsapp.net": {
-        "count": 1,
-        "lastChat": 1792719942442,
+        "count": 2,
+        "lastChat": 1792739870098,
         "name": "FallZ"
       }
     }
@@ -78,6 +78,20 @@
     "welcome": false,
     "leave": false,
     "goodbye": false,
+    "antilink": false,
+    "antitoxic": false,
+    "mute": false,
+    "game": true,
+    "rpg": true,
+    "warnings": [],
+    "chat": {}
+  },
+  "120363423339531498@g.us": {
+    "welcome": false,
+    "goodbye": false,
+    "leave": false,
+    "jid": "120363423339531498@g.us",
+    "name": "Unknown Group",
     "antilink": false,
     "antitoxic": false,
     "mute": false,
