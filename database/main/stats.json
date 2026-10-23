@@ -1,7 +1,8 @@
 {
-  "commandsExecuted": 8,
-  "command_ping": 4,
+  "commandsExecuted": 9,
+  "command_ping": 5,
   "command_self": 1,
   "command_allmenu": 1,
-  "command_swgc": 2
+  "command_swgc": 2,
+  "dailyResets": 1
 }
